@@ -8,13 +8,13 @@ Requires $font-size variable to be set
 */
 
 @function strip-unit($num) {
-  @return $num / ($num * 0 + 1);
+  @return math.div($num, ($num * 0 + 1));
 }
 
 @mixin rem-size($value, $property: font-size) {
   $pxValue: strip-unit($value);
   $baseValue: strip-unit($font-size);
-  $remValue: ($pxValue / $baseValue);
+  $remValue: math.div($pxValue, $baseValue);
   #{$property}: $value;
   #{$property}: $remValue + rem;
 }
