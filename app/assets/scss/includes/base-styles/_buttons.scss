@@ -7,11 +7,58 @@ BUTTONS
 
 .button {
   cursor: pointer;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   border: none;
+  @include transition();
   -webkit-appearance: none;
+  background: var(--primary);
+  border: rem(1) solid var(--primary);
+  color: var(--white);
+  text-decoration: none;
+  padding: rem(12) rem(32);
+  text-align: center;
+  width: auto;
+  border-radius: var(--radius);
+  font-size: rem(16);
+  line-height: 1.4;
+  gap: rem(10);
 
-  &:hover {
-
+  &:hover,
+  &:focus,
+  &:active {
+    background: var(--primary);
+    border: rem(1) solid var(--primary);
+    color: var(--white);
   }
+}
+
+
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(24);
+
+  // Alignment
+
+  &.align-center {
+    justify-content: center;
+  }
+
+  &.align-right {
+    justify-content: flex-end;
+  }
+
+  &.align-spaced {
+    justify-content: space-between;
+  }
+}
+
+
+.simple {
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }

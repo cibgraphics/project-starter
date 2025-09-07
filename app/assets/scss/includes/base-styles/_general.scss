@@ -28,7 +28,8 @@ HEAD TAGS
 }
 
 html, body {
-  height: 100%;
+  min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
 html {
@@ -37,12 +38,47 @@ html {
   -ms-text-size-adjust: 100%;
   font-size: var(--font-size);
   font-family: var(--font);
+  font-weight: var(--normal);
 }
 
 body {
   background: var(--base-color);
 }
 
+::-webkit-scrollbar {
+  width: 1em;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--white);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--black);
+  border-radius: var(--radius);
+  border: 3px solid var(--white);
+}
+
+.skip-to-content {
+  position: absolute;
+  top: rem(-40);
+  left: rem(-40);
+  width: rem(1);
+  height: rem(1);
+  overflow: hidden;
+
+  &:focus {
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    background: var(--primary);
+    color: var(--white);
+    padding: rem(10) rem(20);
+    z-index: 1000;
+  }
+}
 
 
 /*
@@ -87,6 +123,17 @@ img {
   font-weight: bold;
 }
 
+.sr-only {
+  position: absolute;
+  width: rem(1);
+  height: rem(1);
+  padding: 0;
+  margin: rem(-1);
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 
 /*
 -----------------------------------------
@@ -106,11 +153,18 @@ FORM ADJUSTMENTS
 -----------------------------------------
 */
 
-::-webkit-input-placeholder { color: var(--placeholder-color); }
-::-moz-placeholder { color: var(--placeholder-color); }
-:-ms-input-placeholder { color: var(--placeholder-color); }
-input:-moz-placeholder { color: var(--placeholder-color); }
-
+::-webkit-input-placeholder {
+  color: var(--placeholder-color);
+}
+::-moz-placeholder {
+  color: var(--placeholder-color);
+}
+:-ms-input-placeholder {
+  color: var(--placeholder-color);
+}
+input:-moz-placeholder {
+  color: var(--placeholder-color);
+}
 
 input[type="text"],
 input[type="email"],
@@ -138,5 +192,5 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=number] {
-  -moz-appearance:textfield;
+  -moz-appearance: textfield;
 }

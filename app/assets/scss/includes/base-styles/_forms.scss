@@ -4,47 +4,88 @@ FORMS
 -----------------------------------------
 */
 
-
 form {
-  margin: 10px 0;
+}
+
+.field {
+  margin-block-end: rem(24);
 }
 
 label {
   display: block;
-  @include rem-size(15px);
+  font-size: rem(16);
   color: var(--text-color);
-  margin-block-end: 10px;
-  line-height: 1.4em;
+  margin-bottom: rem(6);
+  line-height: 1.4;
+  padding-inline-start: rem(16);
 }
 
-input, textarea {
-  inline-size: 100%;
-  border: 1px solid #333;
-  padding: 10px;
-  @include rem-size(16px);
+input,
+textarea {
+  width: 100%;
+  border: rem(1) solid var(--gray-50);
+  padding: rem(16);
+  font-size: rem(16);
   color: var(--text-color);
-  border-radius: 4px; // For iOS
+  border-radius: var(--radius); // For iOS
+  font-family: var(--font);
+  line-height: 1.4;
 
   &:disabled {
     color: #ccc;
     background: #fff;
   }
+
+  &:focus {
+    outline: rem(1) solid var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 0 rem(10) rgba(0, 153, 0, 0.5);
+  }
 }
 
 textarea {
-  min-height: 200px;
+  min-height: rem(200);
 
   &.small {
-    min-height: 150px;
+    min-height: rem(150);
   }
 
   &.large {
-    min-height: 250px;
+    min-height: rem(250);
   }
 }
 
 select {
-  inline-size: 100%;
+  width: 100%;
+
+  option {
+  }
+}
+
+select {
+  appearance: none;
+  border: rem(1) solid var(--text-color);
+  width: 100%;
+  border-radius: rem(4);
+  padding: rem(10);
+  font-size: rem(16);
+  color: var(--text-color);
+  display: block;
+  line-height: 1;
+  background-color: var(--white);
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUuMjUgOC42MjVMMTIgMTUuMzc1TDE4Ljc1IDguNjI1IiBzdHJva2U9IiMwQTE0MkMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=);
+  background-repeat: no-repeat;
+  background-position: right rem(12) top 50%;
+  background-size: rem(24) rem(24);
+
+  &:disabled {
+    color: #ccc;
+    background: #fff;
+  }
+
+  &:focus-visible {
+    @extend .focus;
+  }
 
   option {
 
@@ -52,17 +93,258 @@ select {
 }
 
 
+.checkbox {
+  $checkbox-height: 20px;
+  
+  min-height: $checkbox-height;
+  border-radius: rem(4);
+  margin-block-end: rem(12);
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+
+  label {
+    position: relative;
+    padding: rem(4) 0 0 rem(35);
+    z-index: 2;
+
+    &:before {
+      content: '';
+      width: $checkbox-height;
+      height: $checkbox-height;
+      cursor: pointer;
+      position: absolute;
+      background: #fff;
+      left: 0;
+      top: 0;
+      border: rem(1) solid var(--text-color);
+      border-radius: rem(4);
+    }
+
+    &:after {
+      content: '';
+      width: rem(11);
+      height: rem(5);
+      position: absolute;
+      top: rem(6);
+      left: rem(5);
+      border: rem(2) solid #ccc;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      opacity: 0;
+      transform: rotate(-45deg);
+    }
+
+    &:hover::after {
+      opacity: 0.2;
+    }
+
+    .label-container {
+      font-size: rem(16);
+      line-height: 1;
+      display: block;
+      text-transform: none;
+    }
+  }
+
+  input[type=checkbox] {
+    position: absolute;
+    left: -9999px;
+
+    &:checked + label:before {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    &:checked + label:after {
+      opacity: 1;
+      border-color: var(--white);
+    }
+  }
+
+  &:focus-within {
+    @extend .focus;
+  }
+}
+
+.radio {
+  display: block;
+  border-radius: rem(4);
+  margin-bottom: rem(12);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    position: relative;
+    z-index: 2;
+    padding: rem(4) 0 0 rem(35);
+
+    &:before {
+      content: '';
+      width: rem(20);
+      height: rem(20);
+      cursor: pointer;
+      position: absolute;
+      background: #fff;
+      left: 0;
+      top: 0;
+      border: rem(1) solid var(--text-color);
+      border-radius: 50%;
+    }
+
+    &:after {
+      content: '';
+      width:  rem(12);
+      height: rem(12);
+      border-radius: 50%;
+      position: absolute;
+      top: rem(5);
+      left: rem(5);
+      background: #ccc;
+      opacity: 0;
+    }
+
+    &:hover::after {
+      opacity: 0.2;
+    }
+    
+    .label-container {
+      font-size: rem(16);
+      line-height: 1;
+      display: block;
+      text-transform: none;
+    }
+  }
+
+  input[type=radio] {
+    position: absolute;
+    left: -9999px;
+
+    &:checked + label:after {
+      opacity: 1;
+      background: var(--primary);
+    }
+  }
+
+  &:focus-within {
+    @extend .focus;
+  }
+}
+
+.toggle {
+  $toggle-height: 24px !default;
+  $toggle-width: 50px !default;
+
+  label {
+    width: auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  
+  input {
+    position: absolute;
+    margin-left: -9999px;
+
+    & + label  .toggle-display {
+      padding: rem(2);
+      width: $toggle-width;
+      height: $toggle-height + 4;
+      border-radius: $toggle-height;
+      display: block;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+      margin: 0 rem(10) 0 0;
+      flex-shrink: 0;
+
+      &:before, &:after {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        content: "";
+      }
+
+      &:before {
+        right: rem(1);
+        background: var(--gray-medium);
+        height: $toggle-height;
+        border: rem(1) solid var(--gray-medium);
+        border-radius: $toggle-height;
+        transition: background 0.4s;
+      }
+
+      &:after {
+        width: $toggle-height;
+        height: $toggle-height;
+        background: var(--white);
+        top: rem(2);
+        left: rem(2);
+        border-radius: 100%;
+        transition: margin 0.4s;
+      }
+    }
+
+    &:checked + label .toggle-display:before {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    &:checked + label .toggle-display:after {
+      margin-left: rem(21);
+    }
+
+    &:focus-visible + label .toggle-display {
+      @extend .focus; 
+    }
+
+    &:disabled + label .toggle-display:before {
+      
+    }
+
+    &:disabled:checked + label .toggle-display:before {
+    }
+
+    &:disabled + label .toggle-display:after {
+    }
+  }
+
+  .toggle-text {
+    font-size: rem(16);
+    color: var(--text-color);
+    line-height: 1;
+  }
+}
+
 /*
 -----------------------------------------
-FORM LAYOUT
+FORM VALIDATION
 -----------------------------------------
 */
 
+.has-error {
+  input,
+  textarea {
+    border-color: var(--error);
 
-.field-group {
-  @include clearfix();
-}
+    &:focus {
+      box-shadow: 0 0 rem(10) rgba(255, 0, 0, 0.5);
+      outline: none;
+    }
+  }
+  
 
-.field {
-  margin-block-end: 20px;
+  .error-message {
+    color: var(--error);
+    font-size: rem(12);
+    margin-block-start: rem(4);
+    padding-inline-start: rem(20);
+  }
 }

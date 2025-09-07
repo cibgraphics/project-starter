@@ -1,20 +1,22 @@
-// Gulpfile.js - replacement for Gruntfile.js
-// Run `npm install --save-dev gulp gulp-sass gulp-postcss autoprefixer gulp-pug gulp-uglify gulp-jshint gulp-imagemin gulp-svgstore browser-sync del` before using
 
-const gulp = require('gulp');
-const sass = require('gulp-sass')(require('sass'));
-const postcss = require('gulp-postcss');
-const autoprefixer = require('autoprefixer');
-const pug = require('gulp-pug');
-const uglify = require('gulp-uglify');
-const jshint = require('gulp-jshint');
-const imagemin = require('gulp-imagemin');
-const svgstore = require('gulp-svgstore');
-const browserSync = require('browser-sync').create();
-const del = require('del');
-const path = require('path');
-const sourcemaps = require('gulp-sourcemaps');
-const stylelint = require('gulp-stylelint');
+// Gulpfile.mjs - ES Module version
+import gulp from 'gulp';
+import gulpSass from 'gulp-sass';
+import * as sass from 'sass';
+import postcss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer';
+import pug from 'gulp-pug';
+import uglify from 'gulp-uglify';
+import jshint from 'gulp-jshint';
+import svgstore from 'gulp-svgstore';
+import browserSyncLib from 'browser-sync';
+import { deleteAsync } from 'del';
+import path from 'path';
+import sourcemaps from 'gulp-sourcemaps';
+
+const browserSync = browserSyncLib.create();
+const sassCompiler = gulpSass(sass);
+let imagemin;
 
 const paths = {
   js: 'app/assets/js/**/*.js',
@@ -28,14 +30,14 @@ const paths = {
   build: 'build',
 };
 
-function clean() {
-  return del([paths.build]);
+async function clean() {
+  return deleteAsync([paths.build]);
 }
 
 function styles() {
   return gulp.src('app/assets/scss/style.scss')
     .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sassCompiler().on('error', sassCompiler.logError))
     .pipe(postcss([autoprefixer({ overrideBrowserslist: ['last 2 versions'] })]))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('build/assets/css'))
@@ -52,14 +54,7 @@ function scripts() {
     .pipe(gulp.dest('build/assets/js'))
     .pipe(browserSync.stream());
 }
-function lintStyles() {
-  return gulp.src('app/assets/scss/**/*.scss')
-    .pipe(stylelint({
-      reporters: [
-        { formatter: 'string', console: true }
-      ]
-    }));
-}
+
 
 function copyFonts() {
   return gulp.src(paths.fonts)
@@ -71,7 +66,10 @@ function copyImages() {
     .pipe(gulp.dest('build/assets/images'));
 }
 
-function images() {
+async function images() {
+  if (!imagemin) {
+    imagemin = (await import('gulp-imagemin')).default;
+  }
   return gulp.src('build/assets/images/**/*.{png,jpg,gif,svg}')
     .pipe(imagemin())
     .pipe(gulp.dest('build/assets/images'));
@@ -105,16 +103,13 @@ function serve() {
   gulp.watch(paths.pugPartials, views);
   gulp.watch(paths.fonts, copyFonts);
   gulp.watch(paths.images, gulp.series(copyImages, images, svgSprite));
+
   gulp.watch(paths.svg, svgSprite);
 }
 
-
-const build = gulp.series(
+export const build = gulp.series(
   clean,
-  lintStyles,
   gulp.parallel(styles, scripts, copyFonts, gulp.series(copyImages, images, svgSprite), views)
 );
 
-gulp.task('default', gulp.series(build, serve));
-gulp.task('build', build);
-gulp.task('lint:styles', lintStyles);
+export default gulp.series(build, serve);

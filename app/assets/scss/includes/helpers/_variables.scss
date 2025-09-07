@@ -5,7 +5,8 @@ WIDTHS
 */
 
 :root {
-  --site-width:             1200px;
+  --site-width: 1200px;
+  --radius: 12px;
 }
 
 
@@ -17,27 +18,21 @@ COLORS
 
 :root {
 
+  --primary: ;
+
   // NEUTRAL
   --white:                  #fff;
+  --gray-05:                #f4f4f4;
+  --gray-10:                #e6e6e6;
+  --gray-20:                #cccccc;
+  --gray-30:                #b3b3b3;
+  --gray-40:                #b3b3b3;
+  --gray-50:                #808080;
+  --gray-60:                #666666;
+  --gray-70:                #4d4d4d;
+  --gray-80:                #333333;
+  --gray-90:                #1a1a1a;
   --black:                  #000;
-
-  // Grays
-
-  --gray-03:                #F4F4F4;
-  --gray-06:                #EEE;
-  --gray-10:                #DDD;
-  --gray-20:                #CCC;
-  --gray-30:                #BBB;
-  --gray-40:                #999;
-  --gray-45:                #888;
-  --gray-50:                #767676; // Light Text
-  --gray-60:                #555;
-  --gray-70:                #444;
-  --gray-80:                #313131; // Base Text
-  --gray-85:                #262626;
-  --gray-90:                #1F1F1F;
-  --gray-92:                #181818;
-  --gray-95:                #111;
 
   // System Colors
 
@@ -65,9 +60,6 @@ COLORS
   --error-50:               #D42228;
   --error-80:               #AD050B;
 
-  --primary:                #;
-
-
   --base-color:             #;
   --content-background:     #;
 
@@ -79,30 +71,11 @@ COLORS
   // User Select (colors when a user selects objects on screen)
   --select-background:      var(--primary);
   --select-text:            var(--white);
+
+  // Placeholder
+  --placeholder-color:      var(--gray-30);
 }
 
-
-
-
-/*
------------------------------------------
-SPACING
------------------------------------------
-*/
-
-
-:root {
-  --space:                  20px;
-  --space-xxxs:             calc(0.25 * var(--space));
-  --space-xxs:              calc(0.375 * var(--space));
-  --space-xs:               calc(0.5 * var(--space));
-  --space-sm:               calc(0.75 * var(--space));
-  --space-md:               calc(1.25 * var(--space));
-  --space-lg:               calc(1.5 * var(--space));
-  --space-xl:               calc(2 * var(--space));
-  --space-xxl:              calc(2.5 * var(--space));
-  --space-xxxl:             calc(3 * var(--space));
-}
 
 
 /*
@@ -113,10 +86,17 @@ FONTS
 
 // Font Family
 :root {
-  --font:                   Helvetica Neue, Helvetica, Arial, sans-serif;;
+  --font: "Brooklyn", "Helvetica Neue", Arial, sans-serif;
+
+  --normal: 400;
+  --semi: 600;
+  --bold: 700;
+
+  --base-font-size-strip: 16;
+  --base-font-size: var(--base-font-size-strip) * 1px;
 }
 
-$font-size:                 16px; // This is a SCSS variable for the mixin function
+$font-size: 16px; // This is a SCSS variable for the mixin function
 
 
 /*
@@ -126,24 +106,74 @@ BREAKPOINTS
 */
 
 $breakpoints: (
-    "desktop-wide":         1248px,
-    "desktop":              1024px,
-    "desktop-small":        992px,
-    "tablet-wide":          850px,
-    "tablet":               768px,
-    "tablet-small":         720px,
-    "phone-wide":           600px,
-    "phone":                480px,
-    "phone-small":          400px
+  "desktop-wide": 1248px,
+  "desktop": 1024px,
+  "desktop-small": 992px,
+  "tablet-wide": 850px,
+  "tablet": 768px,
+  "tablet-small": 720px,
+  "phone-wide": 600px,
+  "phone": 480px,
+  "phone-small": 400px,
 );
 
-@mixin mq($width, $type: min) {
+@mixin mq($width, $type: ">=") {
   @if map_has_key($breakpoints, $width) {
     $width: map_get($breakpoints, $width);
-    @if $type == min {
-      $width: $width + 1px;
+  }
+  // For the future
+  // @media only screen and (width #{$type} $width) {
+  //   @content;
+  // }
+
+  @if $type == ">=" {
+    @media only screen and (min-width: $width) {
+      @content;
     }
-    @media only screen and (#{$type}-width: $width) {
+  } @else if $type == "<=" {
+    @media only screen and (max-width: $width) {
+      @content;
+    }
+  } @else if $type == ">" {
+    @media only screen and (min-width: $width + 1px) {
+      @content;
+    }
+  } @else if $type == "<" {
+    @media only screen and (max-width: $width - 1px) {
+      @content;
+    }
+  }
+}
+
+@mixin container($width, $containerName: "", $type: ">=") {
+  $widthValue: null;
+
+  // Check if the width is a key in the breakpoints map and get the corresponding value
+  @if map_has_key($breakpoints, $width) {
+    $widthValue: map_get($breakpoints, $width);
+  } @else {
+    $widthValue: $width;
+  }
+
+  // For the future
+  // @container #{$containerName} (width #{$type} #{$width}) {
+  //   @content;
+  // }
+
+  @if $type == ">=" {
+    @container #{$containerName} (min-width: #{$widthValue}) {
+      @content;
+    }
+  } @else if $type == "<=" {
+    @container #{$containerName} (max-width: #{$widthValue}) {
+      @content;
+    }
+  } @else if $type == ">" {
+    @container #{$containerName} (min-width: #{($widthValue + 1px)}) {
+      @content;
+    }
+  } @else if $type == "<" {
+    @container #{$containerName} (max-width: #{($widthValue + 1px)}) {
       @content;
     }
   }

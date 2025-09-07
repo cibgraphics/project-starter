@@ -4,4 +4,6 @@ $(function() {
   
 });
 
-const inchToCm = (inches) => inches * 2.54;
+function inchToCm(inches) {
+  return inches * 2.54;
+}

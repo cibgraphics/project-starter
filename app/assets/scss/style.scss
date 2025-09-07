@@ -1,34 +1,30 @@
 @use "sass:math";
 
 /* Bootstrapping */
-@import "includes/helpers/_normalize.scss";
-@import "includes/helpers/_variables.scss";
-@import "includes/helpers/_mixins.scss";
+@use "includes/helpers/_normalize.scss" as *;
+@use "includes/helpers/_variables.scss" as *;
+@use "includes/helpers/_mixins.scss" as *;
 
 
 /* Grid */
-@import "includes/grid/gridlex.scss";
+@use "includes/grid/gridlex.scss" as *;
 
 
 /* Partials */
-@import "includes/base-styles/_animation.scss";
-@import "includes/base-styles/_general.scss";
-@import "includes/base-styles/_layout.scss";
-@import "includes/base-styles/_fonts.scss";
-@import "includes/base-styles/_typography.scss";
-@import "includes/base-styles/_buttons.scss";
-@import "includes/base-styles/_tables.scss";
-@import "includes/base-styles/_forms.scss";
+@use "includes/base-styles/_animation.scss" as *;
+@use "includes/base-styles/_general.scss" as *;
+@use "includes/base-styles/_layout.scss" as *;
+@use "includes/base-styles/_fonts.scss" as *;
+@use "includes/base-styles/_typography.scss" as *;
+@use "includes/base-styles/_buttons.scss" as *;
+@use "includes/base-styles/_tables.scss" as *;
+@use "includes/base-styles/_forms.scss" as *;
 
 
 /* Modules */
-@import "includes/modules/_masthead.scss";
-@import "includes/modules/_footer.scss";
+@use "includes/modules/_masthead.scss" as *;
+@use "includes/modules/_footer.scss" as *;
 
 
 /* Vendors */
-@import "includes/utility/_vendor-overrides.scss";
-
-
-/* Media Queries */
-@import "includes/media-queries/_all.scss";
+@use "includes/utility/_vendor-overrides.scss" as *;

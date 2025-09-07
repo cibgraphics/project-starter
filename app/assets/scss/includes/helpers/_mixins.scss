@@ -7,16 +7,21 @@ Requires $font-size variable to be set
 -----------------------------------------
 */
 
+@use "sass:math";
+
 @function strip-unit($num) {
-  @return math.div($num, ($num * 0 + 1));
+  @return math.div($num, $num * 0 + 1);
 }
 
 @mixin rem-size($value, $property: font-size) {
   $pxValue: strip-unit($value);
   $baseValue: strip-unit($font-size);
   $remValue: math.div($pxValue, $baseValue);
-  #{$property}: $value;
   #{$property}: $remValue + rem;
+}
+
+@function rem($value) {
+  @return calc(#{$value} / var(--base-font-size-strip) * 1rem);
 }
 
 
