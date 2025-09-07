@@ -13,12 +13,12 @@ label {
   display: block;
   @include rem-size(15px);
   color: var(--text-color);
-  margin-bottom: 10px;
+  margin-block-end: 10px;
   line-height: 1.4em;
 }
 
 input, textarea {
-  width: 100%;
+  inline-size: 100%;
   border: 1px solid #333;
   padding: 10px;
   @include rem-size(16px);
@@ -44,7 +44,7 @@ textarea {
 }
 
 select {
-  width: 100%;
+  inline-size: 100%;
 
   option {
 
@@ -64,5 +64,5 @@ FORM LAYOUT
 }
 
 .field {
-  margin-bottom: 20px;
+  margin-block-end: 20px;
 }

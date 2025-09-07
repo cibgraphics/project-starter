@@ -60,15 +60,15 @@ img {
 }
 
 .left {
-  float: left;
+  float: inline-start;
 }
 
 .right {
-  float: right;
+  float: inline-end;
 }
 
 .text-left {
-  text-align: left;
+  text-align: start;
 }
 
 .text-center {
@@ -76,7 +76,7 @@ img {
 }
 
 .text-right {
-  text-align: right;
+  text-align: end;
 }
 
 .italic {
