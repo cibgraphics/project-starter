@@ -9,44 +9,74 @@ LAYOUT
 $baseSize: 0;
 
 @while $baseSize <= 100 {
-  .m-#{$baseSize} {
+  .m-#{$baseSize},
+  %m-#{$baseSize} {
     margin: #{$baseSize}px !important;
   }
 
-  .mt-#{$baseSize} {
-    margin-top: #{$baseSize}px !important;
+  .mt-#{$baseSize},
+  %mt-#{$baseSize} {
+    margin-block-start: #{$baseSize}px;
   }
 
-  .mr-#{$baseSize} {
-    margin-right: #{$baseSize}px !important;
+  .mr-#{$baseSize},
+  %mr-#{$baseSize} {
+    margin-inline-end: #{$baseSize}px;
   }
 
-  .mb-#{$baseSize} {
-    margin-bottom: #{$baseSize}px !important;
+  .mb-#{$baseSize},
+  %mb-#{$baseSize} {
+    margin-block-end: #{$baseSize}px;
   }
 
-  .ml-#{$baseSize} {
-    margin-left: #{$baseSize}px !important;
+  .ml-#{$baseSize},
+  %ml-#{$baseSize} {
+    margin-inline-start: #{$baseSize}px;
   }
 
-  .p-#{$baseSize} {
-    padding: #{$baseSize}px !important;
+  .mx-#{$baseSize},
+  %mx-#{$baseSize} {
+    margin-inline: #{$baseSize}px;
   }
 
-  .pt-#{$baseSize} {
-    padding-top: #{$baseSize}px !important;
+  .my-#{$baseSize},
+  %my-#{$baseSize} {
+    margin-block: #{$baseSize}px;
   }
 
-  .pr-#{$baseSize} {
-    padding-right: #{$baseSize}px !important;
+  .p-#{$baseSize},
+  %p-#{$baseSize} {
+    padding: #{$baseSize}px;
   }
 
-  .pb-#{$baseSize} {
-    padding-bottom: #{$baseSize}px !important;
+  .pt-#{$baseSize},
+  %pt-#{$baseSize} {
+    padding-block-start: #{$baseSize}px;
   }
 
-  .pl-#{$baseSize} {
-    padding-left: #{$baseSize}px !important;
+  .pr-#{$baseSize},
+  %pr-#{$baseSize} {
+    padding-inline-end: #{$baseSize}px;
+  }
+
+  .pb-#{$baseSize},
+  %pb-#{$baseSize} {
+    padding-block-end: #{$baseSize}px;
+  }
+
+  .pl-#{$baseSize},
+  %pl-#{$baseSize} {
+    padding-inline-start: #{$baseSize}px;
+  }
+
+  .px-#{$baseSize},
+  %px-#{$baseSize} {
+    padding-inline: #{$baseSize}px;
+  }
+
+  .py-#{$baseSize},
+  %py-#{$baseSize} {
+    padding-block: #{$baseSize}px;
   }
 
   // Increment the counter
