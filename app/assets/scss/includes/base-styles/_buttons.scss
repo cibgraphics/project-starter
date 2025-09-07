@@ -1,9 +1,10 @@
+@use "../helpers/mixins" as *;
+
 /*
 -----------------------------------------
 BUTTONS
 -----------------------------------------
 */
-
 
 .button {
   cursor: pointer;
@@ -33,8 +34,6 @@ BUTTONS
   }
 }
 
-
-
 .button-group {
   display: flex;
   flex-wrap: wrap;
@@ -54,7 +53,6 @@ BUTTONS
     justify-content: space-between;
   }
 }
-
 
 .simple {
   padding: 0;

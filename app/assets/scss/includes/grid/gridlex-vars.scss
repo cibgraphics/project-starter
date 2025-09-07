@@ -1,16 +1,29 @@
+@use "sass:math";
+
 //************************
 //    VARIABLES
 //************************
-$gl-colCount:   12 !default;
-$gl-gridName:   grid !default;
-$gl-colName:   col !default;
+:root {
+  --gl-gutter: 32px;
+  --gl-gutter-vertical: 32px;
+}
+
+$gl-colCount: 12 !default;
+$gl-gridName: gridlex !default;
+$gl-colName: col !default;
 $gl-attributeName: class !default;
-$gl-gutter:    24px !default; // Total left + right
-$gl-gutter-vertical:    1rem !default;
-$gl-mq-width: 'max-width' !default;
+$gl-gutter: var(--gl-gutter) !default; // Total left + right
+$gl-gutter-vertical: var(--gl-gutter-vertical) !default;
+$gl-mq-width: "max-width" !default;
 $gl-mq-list: (
-        lg: 80em,
-        md: 64em,
-        sm: 48em,
-        xs: 36em
+  xxxxl: 1400px,
+  xxxl: 1248px,
+  xxl: 1024px,
+  xl: 992px,
+  lg: 850px,
+  md: 768px,
+  sm: 720px,
+  xs: 600px,
+  xxs: 480px,
+  xxxs: 400px,
 ) !default;

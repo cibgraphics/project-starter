@@ -1,3 +1,5 @@
+@use "../helpers/mixins" as *;
+
 /*
 -----------------------------------------
 FORMS
@@ -84,18 +86,16 @@ select {
   }
 
   &:focus-visible {
-    @extend .focus;
+    @extend .focus !optional;
   }
 
   option {
-
   }
 }
 
-
 .checkbox {
   $checkbox-height: 20px;
-  
+
   min-height: $checkbox-height;
   border-radius: rem(4);
   margin-block-end: rem(12);
@@ -110,7 +110,7 @@ select {
     z-index: 2;
 
     &:before {
-      content: '';
+      content: "";
       width: $checkbox-height;
       height: $checkbox-height;
       cursor: pointer;
@@ -123,7 +123,7 @@ select {
     }
 
     &:after {
-      content: '';
+      content: "";
       width: rem(11);
       height: rem(5);
       position: absolute;
@@ -149,7 +149,7 @@ select {
     }
   }
 
-  input[type=checkbox] {
+  input[type="checkbox"] {
     position: absolute;
     left: -9999px;
 
@@ -165,7 +165,7 @@ select {
   }
 
   &:focus-within {
-    @extend .focus;
+    @extend .focus !optional;
   }
 }
 
@@ -184,7 +184,7 @@ select {
     padding: rem(4) 0 0 rem(35);
 
     &:before {
-      content: '';
+      content: "";
       width: rem(20);
       height: rem(20);
       cursor: pointer;
@@ -197,8 +197,8 @@ select {
     }
 
     &:after {
-      content: '';
-      width:  rem(12);
+      content: "";
+      width: rem(12);
       height: rem(12);
       border-radius: 50%;
       position: absolute;
@@ -211,7 +211,7 @@ select {
     &:hover::after {
       opacity: 0.2;
     }
-    
+
     .label-container {
       font-size: rem(16);
       line-height: 1;
@@ -220,7 +220,7 @@ select {
     }
   }
 
-  input[type=radio] {
+  input[type="radio"] {
     position: absolute;
     left: -9999px;
 
@@ -231,7 +231,7 @@ select {
   }
 
   &:focus-within {
-    @extend .focus;
+    @extend .focus !optional;
   }
 }
 
@@ -245,12 +245,12 @@ select {
     align-items: center;
     margin-bottom: 0;
   }
-  
+
   input {
     position: absolute;
     margin-left: -9999px;
 
-    & + label  .toggle-display {
+    & + label .toggle-display {
       padding: rem(2);
       width: $toggle-width;
       height: $toggle-height + 4;
@@ -263,7 +263,8 @@ select {
       margin: 0 rem(10) 0 0;
       flex-shrink: 0;
 
-      &:before, &:after {
+      &:before,
+      &:after {
         display: block;
         position: absolute;
         top: 0;
@@ -302,11 +303,10 @@ select {
     }
 
     &:focus-visible + label .toggle-display {
-      @extend .focus; 
+      @extend .focus !optional;
     }
 
     &:disabled + label .toggle-display:before {
-      
     }
 
     &:disabled:checked + label .toggle-display:before {
@@ -339,7 +339,6 @@ FORM VALIDATION
       outline: none;
     }
   }
-  
 
   .error-message {
     color: var(--error);

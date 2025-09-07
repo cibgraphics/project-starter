@@ -1,72 +1,83 @@
 // Make the breakpoints
+@use "sass:math";
+@use "sass:map";
+@use "sass:list";
+@use "gridlex-vars" as vars;
+@use "gridlex-preprocessing" as preproc;
+
 @mixin bp($breakpoint) {
-  $query: map-get($gl-mq-list, $breakpoint);
+  $query: map.get(vars.$gl-mq-list, $breakpoint);
   @if $query != null {
-    @media ($gl-mq-width: #{nth($query, 1)}) {
+    @media (#{vars.$gl-mq-width}: #{list.nth($query, 1)}) {
       @content;
     }
   }
 }
 
 // Function to generate the grid by number
-@mixin makeGridByNumber($grid)
-{
-  @for $i from 1 through $gl-colCount {
-      [#{$gl-attributeName}*="#{$grid}-#{$i}"] > [#{$gl-attributeName}~="#{$gl-colName}"],
-      [#{$gl-attributeName}*="#{$grid}-#{$i}"] > [#{$gl-attributeName}*="#{$gl-colName}-"],
-      [#{$gl-attributeName}*="#{$grid}-#{$i}"] > [#{$gl-attributeName}*="#{$gl-colName}_"] {
-        $fraction: math.div(1, $i);
+@mixin makeGridByNumber($grid) {
+  @for $i from 1 through vars.$gl-colCount {
+    [#{vars.$gl-attributeName}*="#{$grid}-#{$i}"]
+      > [#{vars.$gl-attributeName}~="#{vars.$gl-colName}"],
+    [#{vars.$gl-attributeName}*="#{$grid}-#{$i}"]
+      > [#{vars.$gl-attributeName}*="#{vars.$gl-colName}-"],
+    [#{vars.$gl-attributeName}*="#{$grid}-#{$i}"]
+      > [#{vars.$gl-attributeName}*="#{vars.$gl-colName}_"] {
+      $fraction: math.div(1, $i);
 
-        flex-basis: map-get($gl-colFractions, $fraction);
-        max-width: map-get($gl-colFractions, $fraction);
-      }
+      flex-basis: map.get(preproc.$gl-colFractions, $fraction);
+      max-width: map.get(preproc.$gl-colFractions, $fraction);
+    }
   }
 }
 
 // Function to generate the grid by columns
-@mixin makeCol($col)
-{
-  [#{$gl-attributeName}~="#{$gl-gridName}"],
-  [#{$gl-attributeName}*="#{$gl-gridName}-"],
-  [#{$gl-attributeName}*="#{$gl-gridName}_"] {
-    
-    @for $i from 1 through $gl-colCount {
-      > [#{$gl-attributeName}*="#{$col}-#{$i}"]{ flex-basis: map-get($gl-colPortions, $i); max-width: map-get($gl-colPortions, $i); }
+@mixin makeCol($col) {
+  [#{vars.$gl-attributeName}~="#{vars.$gl-gridName}"],
+  [#{vars.$gl-attributeName}*="#{vars.$gl-gridName}-"],
+  [#{vars.$gl-attributeName}*="#{vars.$gl-gridName}_"] {
+    @for $i from 1 through vars.$gl-colCount {
+      > [#{vars.$gl-attributeName}*="#{$col}-#{$i}"] {
+        flex-basis: map.get(preproc.$gl-colPortions, $i);
+        max-width: map.get(preproc.$gl-colPortions, $i);
+      }
     }
   }
 }
 
 // Function to generate the -first & -last base on mq keys (as _lg-first)
-@mixin makeFirstLast($mq)
-{
-  [#{$gl-attributeName}~="#{$gl-gridName}"],
-  [#{$gl-attributeName}*="#{$gl-gridName}-"],
-  [#{$gl-attributeName}*="#{$gl-gridName}_"] {
-    [#{$gl-attributeName}*="#{$mq}-first"]{
+@mixin makeFirstLast($mq) {
+  [#{vars.$gl-attributeName}~="#{vars.$gl-gridName}"],
+  [#{vars.$gl-attributeName}*="#{vars.$gl-gridName}-"],
+  [#{vars.$gl-attributeName}*="#{vars.$gl-gridName}_"] {
+    [#{vars.$gl-attributeName}*="#{$mq}-first"] {
       order: -1;
     }
-    [#{$gl-attributeName}*="#{$mq}-last"]{
+    [#{vars.$gl-attributeName}*="#{$mq}-last"] {
       order: 1;
     }
   }
 }
 
 // Function to generate the offset
-@mixin makeOff($off)
-{
-  [#{$gl-attributeName}~="#{$gl-gridName}"],
-  [#{$gl-attributeName}*="#{$gl-gridName}-"],
-  [#{$gl-attributeName}*="#{$gl-gridName}_"] {
-    @for $i from 0 through $gl-colCount - 1 {
-      > [data-push-left*="#{$off}-#{$i}"]{ margin-left: map-get($gl-colPortions, $i); }
+@mixin makeOff($off) {
+  [#{vars.$gl-attributeName}~="#{vars.$gl-gridName}"],
+  [#{vars.$gl-attributeName}*="#{vars.$gl-gridName}-"],
+  [#{vars.$gl-attributeName}*="#{vars.$gl-gridName}_"] {
+    @for $i from 0 through vars.$gl-colCount - 1 {
+      > [data-push-left*="#{$off}-#{$i}"] {
+        margin-left: map.get(preproc.$gl-colPortions, $i);
+      }
     }
   }
 
-  [#{$gl-attributeName}~="#{$gl-gridName}"],
-  [#{$gl-attributeName}*="#{$gl-gridName}-"],
-  [#{$gl-attributeName}*="#{$gl-gridName}_"] {
-    @for $i from 0 through $gl-colCount - 1 {
-      > [data-push-right*="#{$off}-#{$i}"]{ margin-right: map-get($gl-colPortions, $i); }
+  [#{vars.$gl-attributeName}~="#{vars.$gl-gridName}"],
+  [#{vars.$gl-attributeName}*="#{vars.$gl-gridName}-"],
+  [#{vars.$gl-attributeName}*="#{vars.$gl-gridName}_"] {
+    @for $i from 0 through vars.$gl-colCount - 1 {
+      > [data-push-right*="#{$off}-#{$i}"] {
+        margin-right: map.get(preproc.$gl-colPortions, $i);
+      }
     }
   }
 }
