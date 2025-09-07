@@ -1,44 +1,101 @@
-/* Print Styles */
+/* Modern Print Styles */
 
-* {
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  background: transparent !important;
-  color: #000 !important;
-}
 
-html, body {
-  background: white;
-  font-size: 12pt;
-}
+@media print {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    background: none !important;
+    color: #000 !important;
+    text-shadow: none !important;
+    filter: none !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
 
-.masthead nav {
-  display: none;
-}
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
 
-.container {
-  width: auto;
-  margin: 0 5%;
-  padding: 0;
-  border: 0;
-  float: none !important;
-  color: black;
-  background: transparent none;
-}
+  .masthead nav,
+  nav,
+  aside,
+  .no-print,
+  [aria-hidden="true"] {
+    display: none !important;
+  }
 
-.content {
-  margin-left: 10%;
-  padding-top: 1em;
-  border-top: 1px solid #930;
-}
+  .container {
+    width: 100% !important;
+    margin-inline: 0 !important;
+    margin-block: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    float: none !important;
+    color: #000 !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
 
-a:link, a:visited {
-  color: #520;
-  background: transparent;
-  font-weight: bold;
-  text-decoration: underline;
-}
+  .content {
+    margin-inline-start: 10%;
+    padding-block-start: 1em;
+    border-block-start: 1px solid #930;
+    background: none !important;
+  }
 
-.content a:link:after, .content a:visited:after {
-  content: " (" attr(href) ") ";
-  font-size: 90%;
+  a,
+  a:link,
+  a:visited {
+    color: #520 !important;
+    background: none !important;
+    font-weight: bold;
+    text-decoration: underline;
+    word-break: break-all;
+  }
+
+  .content a:after {
+    content: " (" attr(href) ") ";
+    font-size: 90%;
+  }
+
+  video,
+  canvas,
+  audio,
+  iframe,
+  object,
+  embed {
+    display: none !important;
+  }
+
+  table {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+
+  @page {
+    margin: 1cm;
+    size: auto;
+  }
 }
