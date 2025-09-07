@@ -17,7 +17,7 @@ label {
   display: block;
   font-size: rem(16);
   color: var(--text-color);
-  margin-bottom: rem(6);
+  margin-block-end: rem(6);
   line-height: 1.4;
   padding-inline-start: rem(16);
 }
@@ -54,13 +54,6 @@ textarea {
 
   &.large {
     min-height: rem(250);
-  }
-}
-
-select {
-  width: 100%;
-
-  option {
   }
 }
 
@@ -116,8 +109,8 @@ select {
       cursor: pointer;
       position: absolute;
       background: #fff;
-      left: 0;
-      top: 0;
+      inset-inline-start: 0;
+      inset-block-start: 0;
       border: rem(1) solid var(--text-color);
       border-radius: rem(4);
     }
@@ -127,11 +120,11 @@ select {
       width: rem(11);
       height: rem(5);
       position: absolute;
-      top: rem(6);
-      left: rem(5);
+      inset-block-start: rem(6);
+      inset-inline-start: rem(5);
       border: rem(2) solid #ccc;
-      border-top: none;
-      border-right: none;
+      border-block-start: none;
+      border-inline-end: none;
       background: transparent;
       opacity: 0;
       transform: rotate(-45deg);
@@ -151,7 +144,7 @@ select {
 
   input[type="checkbox"] {
     position: absolute;
-    left: -9999px;
+    inset-inline-start: -9999px;
 
     &:checked + label:before {
       background: var(--primary);
@@ -172,10 +165,10 @@ select {
 .radio {
   display: block;
   border-radius: rem(4);
-  margin-bottom: rem(12);
+  margin-block-end: rem(12);
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 
   label {
@@ -190,8 +183,8 @@ select {
       cursor: pointer;
       position: absolute;
       background: #fff;
-      left: 0;
-      top: 0;
+      inset-inline-start: 0;
+      inset-block-start: 0;
       border: rem(1) solid var(--text-color);
       border-radius: 50%;
     }
@@ -202,8 +195,8 @@ select {
       height: rem(12);
       border-radius: 50%;
       position: absolute;
-      top: rem(5);
-      left: rem(5);
+      inset-block-start: rem(5);
+      inset-inline-start: rem(5);
       background: #ccc;
       opacity: 0;
     }
@@ -222,7 +215,7 @@ select {
 
   input[type="radio"] {
     position: absolute;
-    left: -9999px;
+    inset-inline-start: -9999px;
 
     &:checked + label:after {
       opacity: 1;
@@ -243,12 +236,12 @@ select {
     width: auto;
     display: flex;
     align-items: center;
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 
   input {
     position: absolute;
-    margin-left: -9999px;
+    margin-inline-start: -9999px;
 
     & + label .toggle-display {
       padding: rem(2);
@@ -267,14 +260,14 @@ select {
       &:after {
         display: block;
         position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
+        inset-block-start: 0;
+        inset-inline-start: 0;
+        inset-block-end: 0;
         content: "";
       }
 
       &:before {
-        right: rem(1);
+        inset-inline-end: rem(1);
         background: var(--gray-medium);
         height: $toggle-height;
         border: rem(1) solid var(--gray-medium);
@@ -286,8 +279,8 @@ select {
         width: $toggle-height;
         height: $toggle-height;
         background: var(--white);
-        top: rem(2);
-        left: rem(2);
+        inset-block-start: rem(2);
+        inset-inline-start: rem(2);
         border-radius: 100%;
         transition: margin 0.4s;
       }
@@ -299,7 +292,7 @@ select {
     }
 
     &:checked + label .toggle-display:after {
-      margin-left: rem(21);
+      margin-inline-start: rem(21);
     }
 
     &:focus-visible + label .toggle-display {

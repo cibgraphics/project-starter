@@ -60,15 +60,15 @@ body {
 
 .skip-to-content {
   position: absolute;
-  top: rem(-40);
-  left: rem(-40);
+  inset-block-start: rem(-40);
+  inset-inline-start: rem(-40);
   width: rem(1);
   height: rem(1);
   overflow: hidden;
 
   &:focus {
-    top: 0;
-    left: 0;
+    inset-block-start: 0;
+    inset-inline-start: 0;
     width: auto;
     height: auto;
     overflow: visible;

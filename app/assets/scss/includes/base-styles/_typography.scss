@@ -31,7 +31,7 @@ p {
   margin-block-end: 1.2em;
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
@@ -39,7 +39,7 @@ li {
   margin-block-end: rem(10);
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
@@ -72,7 +72,7 @@ h6,
   line-height: 1.4;
   font-weight: var(--normal);
   color: var(--text-color);
-  margin-bottom: rem(10);
+  margin-block-end: rem(10);
 }
 
 .text-header--1,

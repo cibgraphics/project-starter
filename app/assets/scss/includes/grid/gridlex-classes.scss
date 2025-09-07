@@ -75,7 +75,7 @@
   &[#{vars.$gl-attributeName}*="-right"] {
     justify-content: flex-end;
     align-self: flex-end;
-    margin-left: auto;
+    margin-inline-start: auto;
   }
   // Vertical alignment on top
   &[#{vars.$gl-attributeName}*="-top"] {
@@ -131,7 +131,7 @@
     > [#{vars.$gl-attributeName}*="#{vars.$gl-colName}-"],
   &[#{vars.$gl-attributeName}*="-noBottom"]
     > [#{vars.$gl-attributeName}*="#{vars.$gl-colName}_"] {
-    padding-bottom: 0;
+    padding-block-end: 0;
   }
 }
 
