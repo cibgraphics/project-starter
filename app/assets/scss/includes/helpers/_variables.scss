@@ -6,7 +6,7 @@ WIDTHS
 
 :root {
   --site-width: 1200px;
-  --radius: 12px;
+  --radius: 4px;
 }
 
 
@@ -18,7 +18,7 @@ COLORS
 
 :root {
 
-  --primary: ;
+  --primary: purple;
 
   // NEUTRAL
   --white:                  #fff;
@@ -59,6 +59,11 @@ COLORS
   --error-20:               #F05157;
   --error-50:               #D42228;
   --error-80:               #AD050B;
+
+  --error:                  var(--error-50);
+  --warn:                   var(--warn-50);
+  --success:                var(--success-50);
+  --info:                   var(--info-50);
 
   --base-color:             #;
   --content-background:     #;

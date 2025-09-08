@@ -116,7 +116,6 @@ mixin inputField(options)
       required = false,
       disabled = false,
       className = '',
-      wrapperClass = '',
       iconLeft = '',
       iconRight = '',
       showPasswordToggle = false
@@ -125,7 +124,7 @@ mixin inputField(options)
     const isPassword = type === 'password';
     const hasRightIcon = iconRight || (isPassword && showPasswordToggle);
 
-  .input-wrapper(class=wrapperClass)
+  .input-wrapper(class=error ? 'has-error' : '')
     if label
       label(for=id)= label
 
@@ -154,7 +153,7 @@ mixin inputField(options)
             button(type='button', class='toggle-password', data-target=id) 👁
 
     if error && errorMessage
-      .error-message= errorMessage
+      p.error-message= errorMessage
 
 
 mixin selectField(options)
@@ -170,24 +169,23 @@ mixin selectField(options)
       required = false,
       disabled = false,
       className = '',
-      wrapperClass = '',
       iconLeft = '',
       iconRight = ''
     } = options;
 
-  .select-wrapper(class=wrapperClass)
+  .input-wrapper(class=error ? 'has-error' : '')
     if label
       label(for=id)= label
 
-    .select-container(class={ 'has-icon-left': iconLeft, 'has-icon-right': iconRight })
+    .input-container(class={ 'has-icon-left': iconLeft, 'has-icon-right': iconRight })
       if iconLeft
-        span.select-icon.left
+        span.input-icon.left
           i(class=iconLeft)
 
       select(
         id=id,
         name=id,
-        class=['select', className, error ? 'select-error' : ''].join(' '),
+        class=['input', className, error ? 'input-error' : ''].join(' '),
         required=required,
         disabled=disabled
       )
@@ -196,11 +194,11 @@ mixin selectField(options)
           option(value=opt.value selected=opt.value === value)= opt.label
 
       if iconRight
-        span.select-icon.right
+        span.input-icon.right
           i(class=iconRight)
 
     if error && errorMessage
-      .error-message= errorMessage
+      p.error-message= errorMessage
 
 
 mixin radioGroupField(options)
@@ -215,10 +213,9 @@ mixin radioGroupField(options)
       errorMessage = '',
       required = false,
       disabled = false,
-      wrapperClass = ''
     } = options;
 
-  .radio-group-wrapper(class=wrapperClass)
+  .input-wrapper(class=error ? 'has-error' : '')
     if label
       label.radio-group-label= label
 
@@ -239,7 +236,7 @@ mixin radioGroupField(options)
           .label-container= opt.label
 
     if error && errorMessage
-      .error-message= errorMessage
+      p.error-message= errorMessage
 
 
 
@@ -254,29 +251,29 @@ mixin toggleField(options)
       error = false,
       errorMessage = '',
       className = '',
-      wrapperClass = '',
       labelPosition = 'right' // or 'left'
     } = options;
 
-  .toggle(class=wrapperClass)
-    input(
-      type='checkbox',
-      id=id,
-      name=name,
-      checked=checked,
-      disabled=disabled
-    )
-    label(for=id)
-      if labelPosition === 'left'
-        .toggle-text= label
+  .input-wrapper(class=error ? 'has-error' : '')
+    .toggle
+      input(
+        type='checkbox',
+        id=id,
+        name=name,
+        checked=checked,
+        disabled=disabled
+      )
+      label(for=id)
+        if labelPosition === 'left'
+          .toggle-text= label
+          .toggle-display(class=className)
 
-      .toggle-display(class=className)
-
-      if labelPosition === 'right'
-        .toggle-text= label
+        if labelPosition === 'right'
+          .toggle-display(class=className)
+          .toggle-text= label
 
     if error && errorMessage
-      .error-message= errorMessage
+      p.error-message= errorMessage
 
 
 mixin checkboxField(options)
@@ -291,20 +288,21 @@ mixin checkboxField(options)
       error = false,
       errorMessage = '',
       className = '',
-      wrapperClass = ''
+      wrapperClass = 'input-wrapper'
     } = options;
 
-  .checkbox(class=wrapperClass)
-    input(
-      type='checkbox',
-      id=id,
-      name=name,
-      checked=checked,
-      disabled=disabled,
-      required=required
-    )
-    label(for=id)
-      .label-container= label
+  .input-wrapper(class=error ? 'has-error' : '')
+    .checkbox
+      input(
+        type='checkbox',
+        id=id,
+        name=name,
+        checked=checked,
+        disabled=disabled,
+        required=required
+      )
+      label(for=id)
+        .label-container= label
 
     if error && errorMessage
-      .error-message= errorMessage
+      p.error-message= errorMessage

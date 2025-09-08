@@ -9,8 +9,8 @@ FORMS
 form {
 }
 
-.field {
-  margin-block-end: rem(24);
+.input-wrapper {
+  margin-block-end: rem(12);
 }
 
 label {
@@ -19,14 +19,13 @@ label {
   color: var(--text-color);
   margin-block-end: rem(6);
   line-height: 1.4;
-  padding-inline-start: rem(16);
 }
 
 input,
 textarea {
   width: 100%;
   border: rem(1) solid var(--gray-50);
-  padding: rem(16);
+  padding: rem(8);
   font-size: rem(16);
   color: var(--text-color);
   border-radius: var(--radius); // For iOS
@@ -268,16 +267,16 @@ select {
 
       &:before {
         inset-inline-end: rem(1);
-        background: var(--gray-medium);
+        background: var(--gray-30);
         height: $toggle-height;
-        border: rem(1) solid var(--gray-medium);
+        border: rem(1) solid var(--gray-30);
         border-radius: $toggle-height;
         transition: background 0.4s;
       }
 
       &:after {
-        width: $toggle-height;
-        height: $toggle-height;
+        width: calc($toggle-height - 2px);
+        height: calc($toggle-height - 2px);
         background: var(--white);
         inset-block-start: rem(2);
         inset-inline-start: rem(2);
@@ -337,6 +336,5 @@ FORM VALIDATION
     color: var(--error);
     font-size: rem(12);
     margin-block-start: rem(4);
-    padding-inline-start: rem(20);
   }
 }
