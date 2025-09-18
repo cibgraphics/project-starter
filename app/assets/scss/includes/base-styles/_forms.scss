@@ -6,17 +6,23 @@ FORMS
 -----------------------------------------
 */
 
+:root {
+  --form-theme-color: var(--primary);
+  --form-border-color: var(--gray-50);
+  --form-text-color: var(--text-color);
+}
+
 form {
 }
 
 .input-wrapper {
-  margin-block-end: rem(12);
+  margin-block-end: rem(16);
 }
 
 label {
   display: block;
   font-size: rem(16);
-  color: var(--text-color);
+  color: var(--form-text-color);;
   margin-block-end: rem(6);
   line-height: 1.4;
 }
@@ -24,10 +30,10 @@ label {
 input,
 textarea {
   width: 100%;
-  border: rem(1) solid var(--gray-50);
+  border: rem(1) solid var(--form-border-color);
   padding: rem(8);
   font-size: rem(16);
-  color: var(--text-color);
+  color: var(--form-text-color);
   border-radius: var(--radius); // For iOS
   font-family: var(--font);
   line-height: 1.4;
@@ -38,8 +44,8 @@ textarea {
   }
 
   &:focus {
-    outline: rem(1) solid var(--primary);
-    border-color: var(--primary);
+    outline: rem(1) solid var(--form-theme-color);
+    border-color: var(--form-theme-color);
     box-shadow: 0 0 rem(10) rgba(0, 153, 0, 0.5);
   }
 }
@@ -58,7 +64,7 @@ textarea {
 
 select {
   appearance: none;
-  border: rem(1) solid var(--text-color);
+  border: rem(1) solid var(--form-border-color);
   width: 100%;
   border-radius: rem(4);
   padding: rem(10);
@@ -82,15 +88,48 @@ select {
   }
 
   option {
+    color: var(--form-text-color);
   }
 }
 
+/* Customizable, scoped defaults (override per-component or theme) */
 .checkbox {
-  $checkbox-height: 20px;
+  /* Core box */
+  --cb-size: #{rem(20)};
+  --cb-radius: #{rem(4)};
+  --cb-border-width: #{rem(1)};
+  --cb-bg: #fff;
+  --cb-border-color: var(--form-border-color);
 
-  min-height: $checkbox-height;
-  border-radius: rem(4);
-  margin-block-end: rem(12);
+  /* Checked state */
+  --cb-checked-bg: var(--form-theme-color);
+  --cb-checked-border-color: var(--cb-checked-bg);
+  --cb-check-color: var(--white, #fff);
+
+  /* Tick (checkmark) */
+  --cb-stroke-width: #{rem(2)};
+  --cb-tick-w: calc(var(--cb-size) * 0.55);
+  --cb-tick-h: calc(var(--cb-size) * 0.28);
+  --cb-tick-top: calc(var(--cb-size) * 0.30);
+  --cb-tick-start: calc(var(--cb-size) * 0.25);
+  --cb-hover-check-opacity: 0.25;
+
+  /* Label text & spacing */
+  --cb-label-fs: #{rem(16)};
+  --cb-label-lh: 1.2;
+  --cb-gap: #{rem(12)};
+  --cb-label-pad-start: calc(var(--cb-size) + #{rem(12)});
+
+  /* Focus ring */
+  --cb-focus-outline: #{rem(2)} solid var(--cb-checked-bg);
+  --cb-focus-outline-offset: #{rem(2)};
+
+  /* Error state hook */
+  --cb-error-color: var(--error);
+
+  min-height: var(--cb-size);
+  border-radius: var(--cb-radius);
+  margin-block-end: var(--cb-gap);
 
   &:last-child {
     margin-block-end: 0;
@@ -98,220 +137,365 @@ select {
 
   label {
     position: relative;
-    padding: rem(4) 0 0 rem(35);
+    padding: #{rem(1)} 0 0 var(--cb-label-pad-start);
     z-index: 2;
+    cursor: pointer;
 
-    &:before {
+    &::before {
       content: "";
-      width: $checkbox-height;
-      height: $checkbox-height;
-      cursor: pointer;
+      inline-size: var(--cb-size);
+      block-size: var(--cb-size);
       position: absolute;
-      background: #fff;
       inset-inline-start: 0;
       inset-block-start: 0;
-      border: rem(1) solid var(--text-color);
-      border-radius: rem(4);
+      background: var(--cb-bg);
+      border: var(--cb-border-width) solid var(--cb-border-color);
+      border-radius: var(--cb-radius);
+      transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
     }
 
-    &:after {
+    &::after {
       content: "";
-      width: rem(11);
-      height: rem(5);
+      inline-size: var(--cb-tick-w);
+      block-size: var(--cb-tick-h);
       position: absolute;
-      inset-block-start: rem(6);
-      inset-inline-start: rem(5);
-      border: rem(2) solid #ccc;
+      inset-block-start: var(--cb-tick-top);
+      inset-inline-start: var(--cb-tick-start);
+      border: var(--cb-stroke-width) solid var(--cb-check-color);
       border-block-start: none;
       border-inline-end: none;
       background: transparent;
       opacity: 0;
       transform: rotate(-45deg);
+      transition: opacity .12s ease;
+      pointer-events: none;
     }
 
     &:hover::after {
-      opacity: 0.2;
+      opacity: var(--cb-hover-check-opacity);
     }
 
     .label-container {
-      font-size: rem(16);
-      line-height: 1;
+      font-size: var(--cb-label-fs);
+      line-height: var(--cb-label-lh);
       display: block;
       text-transform: none;
     }
   }
 
   input[type="checkbox"] {
+    /* Visually hidden but accessible */
     position: absolute;
-    inset-inline-start: -9999px;
+    inline-size: 1px;
+    block-size: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+    clip-path: inset(50%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
 
-    &:checked + label:before {
-      background: var(--primary);
-      border-color: var(--primary);
+    &:focus-visible + label::before {
+      outline: var(--cb-focus-outline);
+      outline-offset: var(--cb-focus-outline-offset);
     }
 
-    &:checked + label:after {
+    &:checked + label::before {
+      background: var(--cb-checked-bg);
+      border-color: var(--cb-checked-border-color);
+    }
+
+    &:checked + label::after {
       opacity: 1;
-      border-color: var(--white);
+    }
+
+    /* Indeterminate support */
+    &:indeterminate + label::after {
+      opacity: 1;
+      transform: none;
+      inline-size: calc(var(--cb-size) * 0.5);
+      block-size: 0;
+      border: 0;
+      border-block-start: var(--cb-stroke-width) solid var(--cb-check-color);
+      inset-inline-start: calc(var(--cb-size) * 0.25);
+      inset-block-start: calc(var(--cb-size) * 0.48);
+    }
+
+    /* Disabled state */
+    &:disabled + label {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    &:disabled + label::before {
+      background: color-mix(in srgb, var(--cb-bg), #000 3%);
     }
   }
 
-  &:focus-within {
-    @extend .focus !optional;
+  /* Error state hook */
+  &.has-error,
+  .has-error & {
+    --cb-border-color: var(--cb-error-color);
+    --cb-focus-outline: #{rem(2)} solid var(--cb-error-color);
   }
 }
 
-.radio {
-  display: block;
-  border-radius: rem(4);
-  margin-block-end: rem(12);
 
-  &:last-child {
-    margin-block-end: 0;
-  }
+.radio {
+  /* Scoped, tweakable defaults */
+  --r-size: #{rem(20)};                         /* outer circle size */
+  --r-radius: #{rem(4)};                        /* wrapper rounding */
+  --r-border-width: #{rem(1)};
+  --r-bg: #fff;
+  --r-border-color: var(--form-border-color);
+
+  --r-dot-color: var(--form-theme-color);       /* checked dot color */
+  --r-hover-dot-opacity: 0.25;
+
+  --r-label-fs: #{rem(16)};
+  --r-label-lh: 1.2;
+  --r-gap: #{rem(12)};
+  --r-label-pad-start: calc(var(--r-size) + #{rem(12)});
+
+  --r-focus-outline: #{rem(2)} solid var(--r-dot-color);
+  --r-focus-outline-offset: #{rem(2)};
+
+  --r-error-color: var(--error);
+
+  /* Derived sizes */
+  --r-content-size: calc(var(--r-size) - 2 * var(--r-border-width));
+  --r-dot-radius: calc(var(--r-content-size) * 0.30); /* dot ≈ 60% of inner */
+
+  display: block;
+  border-radius: var(--r-radius);
+  margin-block-end: var(--r-gap);
+  &:last-child { margin-block-end: 0; }
 
   label {
     position: relative;
     z-index: 2;
-    padding: rem(4) 0 0 rem(35);
+    padding: #{rem(1)} 0 0 var(--r-label-pad-start);
+    cursor: pointer;
 
-    &:before {
+    &::before {
       content: "";
-      width: rem(20);
-      height: rem(20);
-      cursor: pointer;
       position: absolute;
-      background: #fff;
       inset-inline-start: 0;
       inset-block-start: 0;
-      border: rem(1) solid var(--text-color);
+      inline-size: var(--r-size);
+      block-size: var(--r-size);
+
+      /* Make inner area equal to content box (so dot respects border) */
+      box-sizing: border-box;
+      padding: var(--r-border-width);
+      border: var(--r-border-width) solid var(--r-border-color);
       border-radius: 50%;
+      background:
+        var(--r-bg) padding-box; /* base */
+      background-clip: padding-box, border-box;
+      transition: border-color .15s ease, box-shadow .15s ease;
     }
 
-    &:after {
-      content: "";
-      width: rem(12);
-      height: rem(12);
-      border-radius: 50%;
-      position: absolute;
-      inset-block-start: rem(5);
-      inset-inline-start: rem(5);
-      background: #ccc;
-      opacity: 0;
+    /* Hover “ghost” dot (unchecked only) */
+    &:hover::before {
+      background:
+        radial-gradient(circle at 50% 50%,
+          color-mix(in srgb, var(--r-dot-color), transparent calc((1 - var(--r-hover-dot-opacity)) * 100%))
+          0 var(--r-dot-radius),
+          transparent calc(var(--r-dot-radius) + 0.5px)
+        ) padding-box,
+        var(--r-bg) padding-box;
     }
 
-    &:hover::after {
-      opacity: 0.2;
-    }
-
+    /* Keep hover subtle when actually checked (real dot below wins) */
+    &:hover + input[type="radio"]:checked &::before { /* no-op safeguard */ }
+    
     .label-container {
-      font-size: rem(16);
-      line-height: 1;
+      font-size: var(--r-label-fs);
+      line-height: var(--r-label-lh);
       display: block;
       text-transform: none;
     }
   }
 
   input[type="radio"] {
+    /* Visually hidden but accessible */
     position: absolute;
-    inset-inline-start: -9999px;
+    inline-size: 1px;
+    block-size: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+    clip-path: inset(50%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
 
-    &:checked + label:after {
-      opacity: 1;
-      background: var(--primary);
+    &:focus-visible + label::before {
+      outline: var(--r-focus-outline);
+      outline-offset: var(--r-focus-outline-offset);
+    }
+
+    /* Checked state: draw a solid centered dot via radial-gradient */
+    &:checked + label::before {
+      border-color: var(--r-dot-color);
+      background:
+        radial-gradient(circle at 50% 50%,
+          var(--r-dot-color) 0 var(--r-dot-radius),
+          transparent calc(var(--r-dot-radius) + 0.5px)
+        ) padding-box,
+        var(--r-bg) padding-box;
+    }
+
+    /* Disabled */
+    &:disabled + label {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    &:disabled + label::before {
+      background:
+        var(--r-bg) padding-box;
+      border-color: color-mix(in srgb, var(--r-border-color), #000 15%);
     }
   }
 
-  &:focus-within {
-    @extend .focus !optional;
+  /* Optional: your utility focus helper */
+  &:focus-within { @extend .focus !optional; }
+
+  /* Error state hook */
+  &.has-error,
+  .has-error & {
+    --r-border-color: var(--r-error-color);
+    --r-focus-outline: #{rem(2)} solid var(--r-error-color);
   }
 }
 
+
+
+
+
 .toggle {
-  $toggle-height: 24px !default;
-  $toggle-width: 50px !default;
+  /* ===== knobs you’ll actually tweak ===== */
+  --tg-height: #{rem(24)};
+  --tg-width:  #{rem(50)};
+  --tg-padding: #{rem(2)};                     /* inner padding of track */
+  --tg-radius: var(--tg-height);               /* pill */
+
+  --tg-track-bg-off: var(--gray-30, #ddd);
+  --tg-track-border-off: var(--gray-30, #ddd);
+  --tg-track-bg-on: var(--form-theme-color);
+  --tg-track-border-on: var(--tg-track-bg-on);
+
+  --tg-knob-bg: var(--white, #fff);
+  --tg-knob-shadow: 0 1px 2px rgba(0,0,0,.2);
+  --tg-border-width: #{rem(1)};
+
+  --tg-gap: #{rem(10)};                        /* space between switch + text */
+  --tg-text-fs: #{rem(16)};
+  --tg-text-lh: 1.2;
+
+  --tg-focus-outline: #{rem(2)} solid var(--tg-track-bg-on);
+  --tg-focus-offset: #{rem(2)};
+  --tg-error-color: var(--error);
+
+  /* ===== derived sizes (don’t touch) ===== */
+  --_content-w: calc(var(--tg-width) - 2 * var(--tg-padding));
+  --_content-h: calc(var(--tg-height) - 2 * var(--tg-padding));
+  --tg-knob-size: calc(var(--_content-h) - 2 * var(--tg-border-width));
+  --tg-shift: calc(var(--_content-w) - var(--tg-knob-size));
 
   label {
-    width: auto;
     display: flex;
     align-items: center;
-    margin-block-end: 0;
+    gap: var(--tg-gap);
+    margin: 0;
+    cursor: pointer;
   }
 
+  /* Visually hidden, still accessible */
   input {
     position: absolute;
-    margin-inline-start: -9999px;
+    inline-size: 1px;
+    block-size: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+    clip-path: inset(50%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
 
-    & + label .toggle-display {
-      padding: rem(2);
-      width: $toggle-width;
-      height: $toggle-height + 4;
-      border-radius: $toggle-height;
-      display: block;
-      position: relative;
-      cursor: pointer;
-      outline: none;
-      user-select: none;
-      margin: 0 rem(10) 0 0;
-      flex-shrink: 0;
+  .toggle-display {
+    position: relative;
+    inline-size: var(--tg-width);
+    block-size: var(--tg-height);
+    flex-shrink: 0;
+    padding: var(--tg-padding);
+    border-radius: var(--tg-radius);
+    box-sizing: border-box;
 
-      &:before,
-      &:after {
-        display: block;
-        position: absolute;
-        inset-block-start: 0;
-        inset-inline-start: 0;
-        inset-block-end: 0;
-        content: "";
-      }
-
-      &:before {
-        inset-inline-end: rem(1);
-        background: var(--gray-30);
-        height: $toggle-height;
-        border: rem(1) solid var(--gray-30);
-        border-radius: $toggle-height;
-        transition: background 0.4s;
-      }
-
-      &:after {
-        width: calc($toggle-height - 2px);
-        height: calc($toggle-height - 2px);
-        background: var(--white);
-        inset-block-start: rem(2);
-        inset-inline-start: rem(2);
-        border-radius: 100%;
-        transition: margin 0.4s;
-      }
+    /* track */
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: var(--tg-track-bg-off);
+      border: var(--tg-border-width) solid var(--tg-track-border-off);
+      transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
     }
 
-    &:checked + label .toggle-display:before {
-      background: var(--primary);
-      border-color: var(--primary);
+    /* knob */
+    &::after {
+      content: "";
+      position: absolute;
+      inset-block-start: calc(var(--tg-padding) + var(--tg-border-width));
+      inset-inline-start: calc(var(--tg-padding) + var(--tg-border-width));
+      inline-size: var(--tg-knob-size);
+      block-size: var(--tg-knob-size);
+      border-radius: 50%;
+      background: var(--tg-knob-bg);
+      box-shadow: var(--tg-knob-shadow);
+      transition: transform .2s ease;
+      will-change: transform;
     }
+  }
 
-    &:checked + label .toggle-display:after {
-      margin-inline-start: rem(21);
-    }
+  /* states */
+  input:checked + label .toggle-display::before {
+    background: var(--tg-track-bg-on);
+    border-color: var(--tg-track-border-on);
+  }
+  input:checked + label .toggle-display::after {
+    transform: translateX(var(--tg-shift));
+  }
 
-    &:focus-visible + label .toggle-display {
-      @extend .focus !optional;
-    }
+  input:focus-visible + label .toggle-display::before {
+    outline: var(--tg-focus-outline);
+    outline-offset: var(--tg-focus-offset);
+  }
 
-    &:disabled + label .toggle-display:before {
-    }
+  input:disabled + label { cursor: not-allowed; opacity: .6; }
+  input:disabled + label .toggle-display::after { box-shadow: none; }
 
-    &:disabled:checked + label .toggle-display:before {
-    }
-
-    &:disabled + label .toggle-display:after {
-    }
+  /* reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .toggle-display::before,
+    .toggle-display::after { transition: none; }
   }
 
   .toggle-text {
-    font-size: rem(16);
-    color: var(--text-color);
-    line-height: 1;
+    font-size: var(--tg-text-fs);
+    line-height: var(--tg-text-lh);
+    color: var(--form-text-color);
+  }
+
+  /* error hook (optional) */
+  &.has-error,
+  .has-error & {
+    --tg-track-border-off: var(--tg-error-color);
+    --tg-focus-outline: #{rem(2)} solid var(--tg-error-color);
   }
 }
 

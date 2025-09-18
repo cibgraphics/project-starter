@@ -7,17 +7,24 @@ BUTTONS
 */
 
 .button {
+  --btn-bg: var(--primary);
+  --btn-color: var(--white);
+  --btn-padding: #{rem(12)} #{rem(32)};
+
+  --btn-bg-hover: oklch(from var(--btn-bg) calc(l - 0.1) c h);
+  --btn-color-hover: var(--white);
+
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   border: none;
   @include transition();
   -webkit-appearance: none;
-  background: var(--primary);
-  border: rem(1) solid var(--primary);
-  color: var(--white);
+  background: var(--btn-bg);
+  border: rem(1) solid var(--btn-bg);
+  color: var(--btn-color);
   text-decoration: none;
-  padding: rem(12) rem(32);
+  padding: var(--btn-padding);
   text-align: center;
   width: auto;
   border-radius: var(--radius);
@@ -28,9 +35,9 @@ BUTTONS
   &:hover,
   &:focus,
   &:active {
-    background: var(--primary);
-    border: rem(1) solid var(--primary);
-    color: var(--white);
+    background: var(--btn-bg-hover);
+    border: rem(1) solid var(--btn-bg-hover);
+    color: var(--btn-color-hover);
   }
 }
 
