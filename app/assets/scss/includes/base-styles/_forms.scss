@@ -50,6 +50,12 @@ textarea {
   }
 }
 
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: rem(8)
+}
+
 textarea {
   min-height: rem(200);
 
@@ -226,10 +232,19 @@ select {
     &:disabled + label {
       opacity: 0.6;
       cursor: not-allowed;
+      
     }
     &:disabled + label::before {
       background: color-mix(in srgb, var(--cb-bg), #000 3%);
+      border-color: var(--cb-border-color);
     }
+
+    &:disabled:checked + label::before {
+      background: var(--cb-checked-bg);
+      border-color: var(--cb-checked-border-color);
+    }
+
+    
   }
 
   /* Error state hook */
@@ -237,6 +252,10 @@ select {
   .has-error & {
     --cb-border-color: var(--cb-error-color);
     --cb-focus-outline: #{rem(2)} solid var(--cb-error-color);
+
+    input[type=checkbox]:checked + label::before {
+      border-color: var(--cb-error-color);
+    }
   }
 }
 

@@ -19,7 +19,7 @@ a {
 
 p,
 li {
-  font-size: rem(16);
+  font-size: var(--base-font-size);
   line-height: 1.4em;
   font-weight: var(--normal);
   color: var(--text-color);
@@ -27,6 +27,7 @@ li {
 
 ol,
 ul,
+li,
 p {
   margin-block-end: 1.2em;
 
@@ -37,10 +38,6 @@ p {
 
 li {
   margin-block-end: rem(10);
-
-  &:last-child {
-    margin-block-end: 0;
-  }
 }
 
 ul,
@@ -77,32 +74,32 @@ h6,
 
 .text-header--1,
 h1 {
-  font-size: rem(48);
+  font-size: var(--h1-size);
 }
 
 .text-header--2,
 h2 {
-  font-size: rem(40);
+  font-size: var(--h2-size);
 }
 
 .text-header--3,
 h3 {
-  font-size: rem(33);
+  font-size: var(--h3-size);
 }
 
 .text-header--4,
 h4 {
-  font-size: rem(28);
+  font-size: var(--h4-size);
 }
 
 .text-header--5,
 h5 {
-  font-size: rem(20);
+  font-size: var(--h5-size);
 }
 
 .text-header--6,
 h6 {
-  font-size: rem(18);
+  font-size: var(--h6-size);
 }
 
 .text-white {
