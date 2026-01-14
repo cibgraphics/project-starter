@@ -2,8 +2,6 @@
 
 @use "sass:math";
 
-@layer base {
-
 /*
 -----------------------------------------
 REM CONVERSION
@@ -151,5 +149,3 @@ PSUEDO
   display: $display;
   position: $pos;
 }
-
-} // end @layer base

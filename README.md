@@ -3,7 +3,6 @@
 ## Requirements
 
 * Node/NPM
-* Grunt CLI
 
 ## Getting Started
 ### 1 - Installing NPM
@@ -29,15 +28,15 @@ npm install
 ```
 
 ## Get Working
-### 1 - Start Gulp Process
+### 1 - Start Vite Dev Server
 
 Open a command line tool, change directory to the project and enter this command:
 
 ```
-gulp
+npm run dev
 ```
 
-This will start the Gulp default task, build your assets, and launch a local development server with live reload.
+This will start the Vite dev server, build your assets, and launch a local development server with live reload.
 
 You should see output indicating the server is running at http://localhost:8000
 
@@ -47,7 +46,7 @@ In a web browser, go to http://localhost:8000 to view the site.
 
 ### 2 - Working with the Files
 
-All your edits should be done in the `app` folder. Please do NOT edit anything in the `build` folder. Gulp will build these files for you every time there is a change in the `app` folder.
+All your edits should be done in the `app` folder. Please do NOT edit anything in the `build` folder. Vite will build these files for you every time there is a change in the `app` folder.
 
 #### Working with Pug
 
@@ -60,20 +59,20 @@ This project uses a HTML preprocessor called Pug (https://pugjs.org/api/getting-
 There are also multiple variables that are being passed through the template that controls certain elements and colors.
 
 #### 3rd Party Javascript
-JavaScript is auto compiled into bundles. This is done automatically. If the Gulp process is running, just adding a 3rd party plugin to the `lib` folder will cause an auto compile. You do **not** need to add it to the layout via a `script` tag.
+JavaScript is auto compiled into bundles. If the Vite process is running, adding a 3rd party plugin to the `app/assets/js/lib` folder will auto-include it in the build. You do **not** need to add it to the layout via a `script` tag.
 
 ---
 
-## Additional Gulp Tasks
+## Additional Tasks
 
 - **Build for production (no server):**
 	```
-	gulp build
+	npm run build
 	```
 
 - **Lint SCSS styles:**
 	```
-	gulp lint:styles
+	npm run lint:styles
 	```
 	This will check your SCSS for style issues using stylelint.
 
