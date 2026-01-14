@@ -14,6 +14,28 @@ FORMS
   --form-text-color: var(--text-color);
 }
 
+/*
+-----------------------------------------
+FOCUS STATES
+-----------------------------------------
+*/
+
+.focus {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+  box-shadow: var(--focus-shadow);
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.button:focus-visible {
+  @extend .focus;
+}
+
 form {
 }
 
@@ -41,14 +63,14 @@ textarea {
   line-height: 1.4;
 
   &:disabled {
-    color: #ccc;
-    background: #fff;
+    color: var(--gray-60);
+    background: var(--gray-05);
+    cursor: not-allowed;
   }
 
-  &:focus {
-    outline: rem(1) solid var(--form-theme-color);
-    border-color: var(--form-theme-color);
-    box-shadow: 0 0 rem(10) rgba(0, 153, 0, 0.5);
+  &:read-only {
+    color: var(--gray-70);
+    background: var(--gray-05);
   }
 }
 
@@ -87,8 +109,9 @@ select {
   background-size: rem(24) rem(24);
 
   &:disabled {
-    color: #ccc;
-    background: #fff;
+    color: var(--gray-60);
+    background: var(--gray-05);
+    cursor: not-allowed;
   }
 
   &:focus-visible {
@@ -98,6 +121,25 @@ select {
   option {
     color: var(--form-text-color);
   }
+}
+
+.help-text {
+  color: var(--gray-60);
+  font-size: rem(12);
+  margin-block-start: rem(4);
+}
+
+.input.is-invalid,
+.input.is-valid {
+  border-width: rem(2);
+}
+
+.input.is-invalid {
+  border-color: var(--error);
+}
+
+.input.is-valid {
+  border-color: var(--success);
 }
 
 /* Customizable, scoped defaults (override per-component or theme) */
@@ -528,7 +570,8 @@ FORM VALIDATION
 
 .has-error {
   input,
-  textarea {
+  textarea,
+  select {
     border-color: var(--error);
 
     &:focus {

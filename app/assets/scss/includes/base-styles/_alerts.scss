@@ -1,0 +1,43 @@
+@use "../helpers/mixins" as *;
+
+@layer base {
+
+/*
+-----------------------------------------
+ALERTS
+-----------------------------------------
+*/
+
+.alert {
+  --alert-border: var(--gray-30);
+  --alert-bg: var(--gray-05);
+  --alert-text: var(--text-color);
+
+  border: rem(1) solid var(--alert-border);
+  background: var(--alert-bg);
+  color: var(--alert-text);
+  padding: rem(12) rem(16);
+  border-radius: var(--radius);
+}
+
+.alert--info {
+  --alert-border: var(--info-10);
+  --alert-bg: color-mix(in srgb, var(--info-05), var(--white) 85%);
+}
+
+.alert--success {
+  --alert-border: var(--success-10);
+  --alert-bg: color-mix(in srgb, var(--success-05), var(--white) 85%);
+}
+
+.alert--warning {
+  --alert-border: var(--warn-10);
+  --alert-bg: color-mix(in srgb, var(--warn-05), var(--white) 85%);
+}
+
+.alert--error {
+  --alert-border: var(--error-10);
+  --alert-bg: color-mix(in srgb, var(--error-05), var(--white) 85%);
+}
+
+} // end @layer base

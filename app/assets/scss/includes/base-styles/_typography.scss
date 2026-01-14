@@ -54,6 +54,64 @@ small {
   font-size: 0.9em;
 }
 
+hr {
+  border: 0;
+  border-block-end: rem(1) solid var(--gray-20);
+  margin-block: rem(24);
+}
+
+blockquote {
+  margin: rem(20) 0;
+  padding: rem(12) rem(16);
+  border-inline-start: rem(4) solid var(--primary);
+  background: color-mix(in srgb, var(--primary), var(--white) 92%);
+  color: var(--text-color);
+}
+
+code,
+pre,
+kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+code {
+  background: var(--gray-05);
+  border: rem(1) solid var(--gray-20);
+  border-radius: rem(4);
+  padding: rem(2) rem(4);
+  font-size: 0.95em;
+}
+
+pre {
+  background: var(--gray-05);
+  border: rem(1) solid var(--gray-20);
+  border-radius: rem(6);
+  padding: rem(12);
+  overflow: auto;
+  line-height: 1.5;
+
+  code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+}
+
+kbd {
+  background: var(--gray-10);
+  border: rem(1) solid var(--gray-30);
+  border-bottom-width: rem(2);
+  border-radius: rem(4);
+  padding: rem(2) rem(6);
+  font-size: 0.85em;
+}
+
+mark {
+  background: color-mix(in srgb, var(--warn-10), var(--white) 70%);
+  color: var(--text-color);
+  padding: 0 rem(3);
+}
+
 /* Headers */
 
 h1,

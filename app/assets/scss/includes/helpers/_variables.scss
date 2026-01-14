@@ -4,13 +4,16 @@
 
 /*
 -----------------------------------------
-WIDTHS
+GEneral
 -----------------------------------------
 */
 
 :root {
   --site-width: 1200px;
   --radius: 4px;
+  --focus-outline: #{rem(2)} solid var(--primary);
+  --focus-outline-offset: #{rem(2)};
+  --focus-shadow: 0 0 0 #{rem(3)} color-mix(in srgb, var(--primary), transparent 70%);
 }
 
 

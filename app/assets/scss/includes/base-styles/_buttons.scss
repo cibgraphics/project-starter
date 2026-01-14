@@ -41,6 +41,44 @@ BUTTONS
     border: rem(1) solid var(--btn-bg-hover);
     color: var(--btn-color-hover);
   }
+
+  &:disabled,
+  &.is-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+button:disabled,
+[role="button"][aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.button--secondary {
+  --btn-bg: var(--gray-10);
+  --btn-color: var(--gray-90);
+  --btn-bg-hover: var(--gray-20);
+  --btn-color-hover: var(--gray-90);
+}
+
+.button--ghost {
+  --btn-bg: transparent;
+  --btn-color: var(--primary);
+  --btn-bg-hover: color-mix(in srgb, var(--primary), transparent 90%);
+  --btn-color-hover: var(--primary);
+}
+
+.button--danger {
+  --btn-bg: var(--error);
+  --btn-color: var(--white);
+  --btn-bg-hover: color-mix(in srgb, var(--error), #000 15%);
+  --btn-color-hover: var(--white);
+}
+
+.button--loading {
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .button-group {
