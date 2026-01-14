@@ -8,6 +8,8 @@ Twitter: @rich_clark
 Added reset by Christopher Bishop
 */
 
+@layer reset {
+
 html,
 body,
 div,
@@ -208,3 +210,5 @@ img {
     clear: both;
   }
 }
+
+} // end @layer reset

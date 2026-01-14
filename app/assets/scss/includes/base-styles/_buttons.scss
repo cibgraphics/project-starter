@@ -1,5 +1,7 @@
 @use "../helpers/mixins" as *;
 
+@layer base {
+
 /*
 -----------------------------------------
 BUTTONS
@@ -67,3 +69,5 @@ BUTTONS
   border: none;
   cursor: pointer;
 }
+
+} // end @layer base

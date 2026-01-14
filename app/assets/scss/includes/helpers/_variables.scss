@@ -1,5 +1,7 @@
 @use "../helpers/mixins" as *;
 
+@layer base {
+
 /*
 -----------------------------------------
 WIDTHS
@@ -67,8 +69,8 @@ COLORS
   --success:                var(--success-50);
   --info:                   var(--info-50);
 
-  --base-color:             #;
-  --content-background:     #;
+  --base-color:             var(--white);
+  --content-background:     var(--white);
 
   // Text
   --text-color:             var(--gray-80);
@@ -192,3 +194,5 @@ $breakpoints: (
     }
   }
 }
+
+} // end @layer base

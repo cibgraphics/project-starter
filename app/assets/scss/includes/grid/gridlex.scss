@@ -10,3 +10,7 @@
 @use "gridlex-preprocessing" as *;
 @use "gridlex-mixins" as *;
 @use "gridlex-classes" as *;
+
+@layer grid {
+// Grid styles are defined in the imported files above
+}

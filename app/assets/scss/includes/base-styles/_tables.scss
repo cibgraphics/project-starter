@@ -1,3 +1,5 @@
+@layer base {
+
 /*
 -----------------------------------------
 TABLES
@@ -52,3 +54,5 @@ td {
 .cell85 {width:85%;}
 .cell90 {width:90%;}
 .cell95 {width:95%;}
+
+} // end @layer base

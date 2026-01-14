@@ -1,5 +1,7 @@
 @use "../helpers/mixins" as *;
 
+@layer base {
+
 /*
 -----------------------------------------
 Background Highlights
@@ -164,7 +166,6 @@ input:-moz-placeholder {
 input[type="text"],
 input[type="email"],
 input[type="tel"],
-,
 input[type="file"],
 textarea {
   -webkit-appearance: none;
@@ -190,3 +191,5 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+} // end @layer base

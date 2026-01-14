@@ -1,5 +1,5 @@
-mixin state-dropdown()
-  select
+mixin state-dropdown(id='state', name=id)
+  select(id=id name=name)
     option(value="AL") AL
     option(value="AK") AK
     option(value="AZ") AZ
@@ -52,8 +52,8 @@ mixin state-dropdown()
     option(value="WI") WI
     option(value="WY") WY
 
-mixin month-dropdown()
-  select
+mixin month-dropdown(id='month', name=id)
+  select(id=id name=name)
     option(value="01") 1 - Jan
     option(value="02") 2 - Feb
     option(value="03") 3 - Mar
@@ -67,31 +67,26 @@ mixin month-dropdown()
     option(value="11") 11 - Nov
     option(value="12") 12 - Dec
 
-mixin year-dropdown-up()
-  select
-    option(value="2019") 2019
-    option(value="2019") 2020
-    option(value="2019") 2021
-    option(value="2019") 2022
-    option(value="2019") 2023
-    option(value="2019") 2024
-    option(value="2019") 2025
+mixin year-dropdown-up(start=2019, end=2025, id='year', name=id)
+  select(id=id name=name)
+    each year in Array.from({length: end - start + 1}, (_, i) => start + i)
+      option(value=year)= year
 
-mixin day-dropdown()
-  select(name="day")
+mixin day-dropdown(id='day', name=id)
+  select(id=id name=name)
     each day in [...Array(31).keys()].map(d => d + 1)
       option(value=day)= day
 
-mixin year-dropdown-down(start=2017, end=1900)
-  select(name="year")
+mixin year-dropdown-down(start=2026, end=1900, id='year', name=id)
+  select(id=id name=name)
     each year in Array.from({length: start - end + 1}, (_, i) => start - i)
       option(value=year)= year
 
 
-mixin county-dropdown()
-  select
+mixin county-dropdown(id='country', name=id)
+  select(id=id name=name)
     option(value="United States") United States
-    option(value="Canada") Cananda
+    option(value="Canada") Canada
 
 
 mixin svg(id, classname)

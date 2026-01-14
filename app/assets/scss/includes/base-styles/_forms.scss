@@ -1,5 +1,7 @@
 @use "../helpers/mixins" as *;
 
+@layer base {
+
 /*
 -----------------------------------------
 FORMS
@@ -22,7 +24,7 @@ form {
 label {
   display: block;
   font-size: rem(16);
-  color: var(--form-text-color);;
+  color: var(--form-text-color);
   margin-block-end: rem(6);
   line-height: 1.4;
 }
@@ -541,3 +543,5 @@ FORM VALIDATION
     margin-block-start: rem(4);
   }
 }
+
+} // end @layer base

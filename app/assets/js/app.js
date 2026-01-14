@@ -1,7 +1,5 @@
-$(function() {
-    
-  // Put all your jQuery goodness here
-  
+document.addEventListener('DOMContentLoaded', () => {
+  // Put all your JS goodness here
 });
 
 function inchToCm(inches) {

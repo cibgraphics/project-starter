@@ -1,5 +1,7 @@
 @use "../helpers/mixins" as *;
 
+@layer base {
+
 /*
 -----------------------------------------
 LAYOUT
@@ -97,3 +99,5 @@ main {
   margin: 0 auto;
   position: relative;
 }
+
+} // end @layer base
